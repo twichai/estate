@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project: one
+  user: one
+  room_number: MyString
+  floor: 1
+  sqm: 9.99
+  price: 9.99
+  unit_type: MyString
+  facing: MyString
+  status: MyString
+
+two:
+  project: two
+  user: two
+  room_number: MyString
+  floor: 1
+  sqm: 9.99
+  price: 9.99
+  unit_type: MyString
+  facing: MyString
+  status: MyString
