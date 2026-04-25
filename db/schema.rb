@@ -10,9 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_25_081442) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_25_085328) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "projects", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "location"
+    t.string "name"
+    t.datetime "updated_at", null: false
+  end
 
   create_table "roles", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -22,6 +29,22 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_25_081442) do
     t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
+  end
+
+  create_table "units", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "facing"
+    t.integer "floor"
+    t.decimal "price"
+    t.bigint "project_id", null: false
+    t.string "room_number"
+    t.decimal "sqm"
+    t.string "status"
+    t.string "unit_type"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["project_id"], name: "index_units_on_project_id"
+    t.index ["user_id"], name: "index_units_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -43,4 +66,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_25_081442) do
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
+
+  add_foreign_key "units", "projects"
+  add_foreign_key "units", "users"
 end
